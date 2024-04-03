@@ -31,19 +31,36 @@ public class SkeletonBattleState : EnemyState
 
         if (enemy.IsPlayerDetected()) 
         {
+            stateTimer = enemy.battleTime;
+
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
-                Debug.Log("Attack");
-                enemy.ZeroVelocity();
-                return;
+                if(CanAttack())
+                stateMachine.ChangeState(enemy.attackState);
             }
         }
+        else
+        {
+            if(stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 10)
+                stateMachine.ChangeState(enemy.idleState);
+        }
 
-        if(player.position.x > enemy.transform.position.x)
+        if (player.position.x > enemy.transform.position.x)
             moveDir = 1;
         else if(player.position.x < enemy.transform.position.x)  
             moveDir = -1; 
 
         enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
+    }
+
+    private bool CanAttack()
+    {
+        if(Time.time >= enemy.lastTimeAttacked + enemy.attackCooldown)
+        {
+            enemy.lastTimeAttacked = Time.time;
+            return true;
+        }
+        Debug.Log("Attack is on cooldown");
+        return false;
     }
 }

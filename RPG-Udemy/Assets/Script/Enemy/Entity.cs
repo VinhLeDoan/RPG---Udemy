@@ -35,7 +35,7 @@ public class Entity : MonoBehaviour
 
     }
 
-    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    public void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
 
 
