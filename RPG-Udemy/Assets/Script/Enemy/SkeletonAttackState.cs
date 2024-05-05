@@ -5,9 +5,9 @@ using UnityEngine;
 public class SkeletonAttackState : EnemyState
 {
     private Enemy_Skeleton enemy;
-    public SkeletonAttackState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolname, Enemy_Skeleton enemy) : base(_enemyBase, _stateMachine, _animBoolname)
+    public SkeletonAttackState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolname, Enemy_Skeleton _enemy) : base(_enemyBase, _stateMachine, _animBoolname)
     {
-        this.enemy = enemy;
+        this.enemy = _enemy;
     }
 
     public override void Enter()

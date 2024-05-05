@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerAnimationTriggers : MonoBehaviour
 {
-    private Player Player => GetComponentInParent<Player>();
+    private Player player => GetComponentInParent<Player>();
 
     private void AnimationTrigger()
     {
-        Player.AnimationTrigger();
+        player.AnimationTrigger();
     }
 
     private void AttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(Player.attackCheck.position, Player.attackCheckRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
 
         foreach(var hit in colliders)
         {

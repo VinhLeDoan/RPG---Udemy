@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkeletonIdleState : SkeletonGroundedState
 {
-    public SkeletonIdleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolname, Enemy_Skeleton enemy) : base(_enemyBase, _stateMachine, _animBoolname, enemy)
+    public SkeletonIdleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolname, Enemy_Skeleton _enemy) : base(_enemyBase, _stateMachine, _animBoolname, _enemy)
     {
     }
 
