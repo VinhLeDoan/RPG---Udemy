@@ -17,8 +17,6 @@ public class Player : Entity
     public float jumpForce;
 
     [Header("Dash info")]
-    [SerializeField] private float dashCoolDown;
-    private float dashUsageTimer;
     public float dashSpeed;
     public float dashDuration;
     public float dashDir {  get; private set; }
@@ -26,7 +24,7 @@ public class Player : Entity
 
 
 
-
+    public SkillManager skill {  get; private set; }
 
 
 
@@ -43,6 +41,9 @@ public class Player : Entity
     public PlayerPrimaryAttackState primaryAttack { get; private set; }
     public PlayerCounterAttackState counterAttack { get; private set; }
 
+    public PlayerAimSwordState aimSword { get; private set; }
+    public PlayerCatchSwordState catchSword { get; private set; }
+
 
     protected override void Awake()
     {
@@ -56,8 +57,12 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         wallSlide = new PlayerWallSlideState(this, stateMachine, "WallSlide");
         wallJump = new PlayerWallJumpState(this, stateMachine, "Jump");
+
         primaryAttack = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttack = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+
+        aimSword = new PlayerAimSwordState(this, stateMachine, "AimSword");
+        catchSword = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
     }
 
 
@@ -66,6 +71,9 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+
+        skill = SkillManager.instance;
+
         stateMachine.Initialize(idleState);
 
     }
@@ -96,11 +104,11 @@ public class Player : Entity
         if(IsWallDetected())
             return;
 
-        dashUsageTimer -= Time.deltaTime;
+        
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CanUseSkill())
         {
-            dashUsageTimer = dashCoolDown;
+            
             dashDir = Input.GetAxisRaw("Horizontal");
 
             if (dashDir == 0)
