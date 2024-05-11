@@ -1968,8 +1968,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   swordPrefab: {fileID: 3079655835528539225, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
-  launchForce: {x: 20, y: 20}
-  swordGravity: 4
+  launchForce: {x: 35, y: 35}
+  swordGravity: 4.5
   numberOfDots: 20
   spaceBetweenDots: 0.07
   dotPrefab: {fileID: 5882722369487139180, guid: 5a316f873ec48bd44b563f415ecd2981, type: 3}
@@ -3954,6 +3954,7 @@ MonoBehaviour:
   jumpForce: 12
   dashSpeed: 25
   dashDuration: 0.2
+  sword: {fileID: 0}
 --- !u!50 &2133680824
 Rigidbody2D:
   serializedVersion: 4
@@ -4040,9 +4041,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 940777871819610200, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5363228
+      objectReference: {fileID: 0}
+    - target: {fileID: 940777871819610200, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.84401304
+      objectReference: {fileID: 0}
+    - target: {fileID: 940777871819610200, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 115.133
+      objectReference: {fileID: 0}
     - target: {fileID: 3079655835528539225, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
       propertyPath: m_Name
       value: Sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079655835528539225, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3079655835528539225, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
       propertyPath: m_IsActive
@@ -4088,6 +4105,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6781032729040367168, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515422993452653443, guid: 72148f2aa9cdf9942a91b73807bdce22, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2004053239, guid: f6b296ee51c42564abe9c05f1c502ecd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
