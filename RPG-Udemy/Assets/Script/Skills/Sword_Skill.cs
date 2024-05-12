@@ -1,9 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SwordType
+{
+    Regular,
+    Bounce,
+    Prirce,
+    Spin
+}
+
 public class Sword_Skill : Skill
 {
+    public SwordType swordType = SwordType.Regular;
+
+    [Header("Bounce info")]
+    [SerializeField] private int bounceAmount;
+    [SerializeField] private float bounceGravity;
+
+    [Header("Peirce info")]
+    [SerializeField] private int pierceAmount;
+    [SerializeField] private float pierceGravity;
+
+    [Header("Spin info")]
+    [SerializeField] private float hitCooldown = .35f;
+    [SerializeField] private float maxTravelDistance = 7;
+    [SerializeField] private float spinDuration = 2;
+    [SerializeField] private float spinGravity = 1;
+
     [Header("Skill info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
@@ -25,6 +50,18 @@ public class Sword_Skill : Skill
         base.Start();
 
         GenereateDots();
+
+        SetupGravity();
+    }
+
+    private void SetupGravity()
+    {
+        if (swordType == SwordType.Bounce)
+            swordGravity = bounceGravity;
+        else if (swordType == SwordType.Prirce)
+            swordGravity = pierceGravity;
+        else if (swordType == SwordType.Spin)
+            swordGravity = spinGravity;
     }
 
     protected override void Update()
@@ -45,6 +82,13 @@ public class Sword_Skill : Skill
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         Sword_Skill_Contrller newSwordScript = newSword.GetComponent<Sword_Skill_Contrller>();
 
+        if (swordType == SwordType.Bounce)
+            newSwordScript.SetupBounce(true, bounceAmount);
+        else if (swordType == SwordType.Prirce)
+            newSwordScript.SetupPierce(pierceAmount);
+        else if (swordType == SwordType.Spin)
+            newSwordScript.SetupSpin(true, maxTravelDistance, spinDuration, hitCooldown);
+
         newSwordScript.SetupSword(finalDir, swordGravity, player);
 
         player.AssignNewSword(newSword);
@@ -52,6 +96,7 @@ public class Sword_Skill : Skill
         DotsActive(false);
     }
 
+    #region Aim region
     public Vector2 AimDirection()
     {
         Vector2 playerPosition = player.transform.position;
@@ -87,4 +132,5 @@ public class Sword_Skill : Skill
         
         return position;
     }
+    #endregion
 }
