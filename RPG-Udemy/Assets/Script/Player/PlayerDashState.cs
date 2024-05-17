@@ -12,7 +12,12 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        player.skill.clone.CreateClone(player.transform);
+        float xOffset;
+        if (Random.Range(0, 100) > 50)
+            xOffset = 2;
+        else
+            xOffset = -2;
+        player.skill.clone.CreateClone(player.transform, new Vector3(xOffset, 0));
 
         stateTimer = player.dashDuration;
     }
