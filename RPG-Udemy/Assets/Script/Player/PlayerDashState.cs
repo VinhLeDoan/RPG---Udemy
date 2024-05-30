@@ -12,12 +12,7 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        float xOffset;
-        if (Random.Range(0, 100) > 50)
-            xOffset = 2;
-        else
-            xOffset = -2;
-        player.skill.clone.CreateClone(player.transform, new Vector3(xOffset, 0));
+        player.skill.clone.CreateCloneOnDashStart();
 
         stateTimer = player.dashDuration;
     }
@@ -25,6 +20,8 @@ public class PlayerDashState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        player.skill.clone.CreateCloneOnDashOver();
 
         player.SetVelocity(0, rb.velocity.y);
     }
