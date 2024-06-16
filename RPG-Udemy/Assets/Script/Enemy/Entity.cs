@@ -19,6 +19,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public EntityFX fx { get; private set; }
     public SpriteRenderer sr { get; private set; }
+    public CharacterStarts starts { get; private set; }
 
 
     [Header("Knockback info")]
@@ -36,6 +37,7 @@ public class Entity : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         fx = GetComponent<EntityFX>();
+        starts = GetComponent<CharacterStarts>();
     }
     protected virtual void Update()
     {
