@@ -60,7 +60,7 @@ public class SkeletonBattleState : EnemyState
             enemy.lastTimeAttacked = Time.time;
             return true;
         }
-        Debug.Log("Attack is on cooldown");
+        
         return false;
     }
 }

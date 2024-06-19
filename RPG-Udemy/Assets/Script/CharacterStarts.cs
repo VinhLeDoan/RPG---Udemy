@@ -5,26 +5,39 @@ using UnityEngine;
 
 public class CharacterStarts : MonoBehaviour
 {
-    public int damage;
-    public int maxHealth;
+
+    public Start strength;
+    public Start maxHealth;
+    public Start damage;
+    
 
     [SerializeField] private int currentHealth;
 
-    void Start()
+    protected virtual void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = maxHealth.GetValue();
+
+       
     }
 
-    public void TakeDamage(int _damage)
+    public virtual void DoDamage(CharacterStarts _targetStarts)
+    {
+        int totalDamage = damage.GetValue() + strength.GetValue();
+        _targetStarts.TakeDamage(totalDamage);
+    }
+
+    public virtual void TakeDamage(int _damage)
     {
         currentHealth -= _damage;
+
+        Debug.Log(_damage);
 
         if (currentHealth < 0)
             Die();
     }
 
-    private void Die()
+    protected virtual void Die()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
