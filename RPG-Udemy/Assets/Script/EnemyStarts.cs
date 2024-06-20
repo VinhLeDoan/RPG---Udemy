@@ -18,4 +18,10 @@ public class EnemyStarts : CharacterStarts
 
         enemy.DamageEffect();
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        enemy.Die();
+    }
 }

@@ -19,4 +19,11 @@ public class PlayerStarts : CharacterStarts
 
         player.DamageEffect();
     }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        player.Die();
+    }
 }
